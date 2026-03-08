@@ -1,14 +1,16 @@
 # Job Search OS
 
-A multi-agent system that automates the operational overhead of a job search — so you spend time on conversations and interviews, not tracking and research.
+A multi-agent system that automates the operational overhead of a job search — so candidates spend time on conversations and interviews, not tracking and research.
 
 ---
 
-## Why I Built This
+## The Problem
 
 Managing a job search at scale means constantly context-switching between researching companies, drafting personalized outreach, tracking pipeline status, and prepping for interviews. Each task is repetitive and time-consuming individually. Together they create enough friction that things fall through the cracks.
 
-This system delegates the operational work to agents, each specialized for a specific task, coordinating to keep the pipeline moving.
+Most job seekers either over-engineer a spreadsheet system that doesn't scale, or let things go untracked and miss follow-ups. Neither works.
+
+This system delegates the operational work to specialized agents that coordinate to keep the pipeline moving — so the candidate can focus on the parts that actually require a human.
 
 ---
 
@@ -27,10 +29,10 @@ This system delegates the operational work to agents, each specialized for a spe
 ## Architecture Decisions
 
 **Why multi-agent instead of one agent?**
-Each task has different latency requirements and failure modes. Research is slow and I/O-bound — it can run in parallel for 5 companies simultaneously. Outreach drafting is fast but quality-sensitive and needs human approval before sending. Separating them means failures in research don't block outreach, and I can evaluate each agent independently.
+Each task has different latency requirements and failure modes. Research is slow and I/O-bound — it can run in parallel for multiple companies simultaneously. Outreach drafting is fast but quality-sensitive and needs human approval before sending. Separating them means failures in research don't block outreach, and each agent can be evaluated independently.
 
 **Why human-in-the-loop on outreach?**
-Personalized messages sent without review would damage relationships if wrong. The agent drafts, I approve, then it sends. Guardrail by design, not as an afterthought.
+Personalized messages sent without review would damage relationships if wrong. The agent drafts, the user approves, then it sends. Guardrail by design, not as an afterthought.
 
 **Memory strategy**
 Pipeline state is persisted to a local JSON store between sessions. Research results are cached to avoid redundant API calls. Interview transcripts are stored and indexed for retrieval when prepping for follow-up rounds.
