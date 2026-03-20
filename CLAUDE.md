@@ -1,8 +1,21 @@
 # Job Search OS — CLAUDE.md
 
+## How This System Works
+See @docs/system-guide.md for a full explanation of the file structure, build process, and how to use PRPs.
+
+## Build Loop (the mental model)
+UNDERSTAND → SPECIFY → ALIGN → BUILD → VERIFY → COMPOUND → repeat
+- UNDERSTAND: /research (for complex features) before writing INITIAL.md
+- SPECIFY: fill INITIAL.md → /generate-prp → produces PRP
+- ALIGN: annotate PRP inline → "address notes, don't implement yet" → iterate
+- BUILD: /execute-prp → Ralph loop (implement → validate → fix → validate → proceed)
+- VERIFY: /review-phase in fresh context (Writer/Reviewer pattern)
+- COMPOUND: update tasks/lessons.md + examples/ + CLAUDE.md (explicit, every phase)
+
 ## Project
-Interview intelligence dashboard + agentic layer for job search automation.
-This is a real system used in a real job search — data is real, outputs matter.
+Agentic interview intelligence tool — agent-first, self-hosted web app, open source.
+Problem Space B (v1): interview conversion — prep, debrief, improvement tracking.
+Problem Space A (v2): pipeline generation — research, outreach, tracking.
 
 **Frontend:** Next.js 14 (App Router), TypeScript, Supabase (Postgres), Vercel, Tailwind CSS
 **Agents:** Python, Claude API (Anthropic SDK)
@@ -99,7 +112,9 @@ For any task with more than 3 steps:
 - Commit API keys, secrets, or credentials
 - Push to main without explicit confirmation
 - Modify Supabase migrations after they've run
-- Touch files in personal-os-main
+
+**Ask first (in addition to above):**
+- Any changes to files in personal-os-main
 
 ---
 
