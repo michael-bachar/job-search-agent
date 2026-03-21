@@ -3,9 +3,22 @@
 ## How This System Works
 See @docs/system-guide.md for a full explanation of the file structure, build process, and how to use PRPs.
 
+## Model Selection
+- **Opus** — complex, multi-phase builds, architecture decisions, anything touching 5+ files
+- **Sonnet** — simple tasks, single-file edits, quick fixes
+
+## Plan Mode (use this, every session)
+Press **Shift+Tab twice** to activate. Claude reads files and writes a plan without touching any code.
+Press **Ctrl+G** to open the plan in your editor and annotate it before executing.
+Exit plan mode and Claude one-shots the implementation from the approved plan.
+
 ## Build Loop (the mental model)
-UNDERSTAND → SPECIFY → ALIGN → BUILD → VERIFY → COMPOUND → repeat
-- UNDERSTAND: /research (for complex features) before writing INITIAL.md
+**Simple task** (describable in one sentence) → just do it directly
+**Medium task** (multi-file, clear scope) → Plan Mode → execute
+**Complex feature** (multi-phase, architecture decisions) → brainstorm → INITIAL.md → /generate-prp → /execute-prp
+
+For complex features:
+- UNDERSTAND: /research before writing INITIAL.md
 - SPECIFY: fill INITIAL.md → /generate-prp → produces PRP
 - ALIGN: annotate PRP inline → "address notes, don't implement yet" → iterate
 - BUILD: /execute-prp → Ralph loop (implement → validate → fix → validate → proceed)
